@@ -1,12 +1,9 @@
 Rails.application.routes.draw do
-  get 'coments/new'
-  post 'coments' => 'coments#create'
-  get 'coments/index'
-  get 'coments/show'
-  get 'coments/edit'
-  devise_for :users
   root to: "homes#top"
+  devise_for :users
   get "about" => "homes#about"
-  
+  resources :comments, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+  resources :users, only: [:show, :edit]
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

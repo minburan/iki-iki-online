@@ -1,0 +1,13 @@
+<h1>投稿詳細</h1>
+
+<div>
+  <p>投稿者：<%= @comment.user.name %></p>
+  <p>タイトル：<%= @comment.title %></p>
+  <p>本文：<%= @comment.body %></p>
+  <p>投稿日：<%= @comment.created_at.strftime('%Y/%m/%d')%></p>
+  <% if @comment.user == current_user %>
+    <%= link_to "編集する", edit_comment_path(@comment.id) %>
+    <%= link_to "削除する", comment_path(@comment.id), method: :delete %>
+  <% end %>
+</div>
+
