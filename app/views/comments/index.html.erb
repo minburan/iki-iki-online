@@ -2,10 +2,13 @@
 
 <% @comments.each do |comment| %>
 
-  <%= link_to comment_path(comment.id) do%>
-    <P>タイトル:<%= comment.title %></p>
-  <% end %> 
+  <div>
+    <%= image_tag @comment.user.get_profile_image(100,100) %>
+    <%= link_to comment_path(comment.id) do%>
+      <P>タイトル:<%= comment.title %></p>
+    <% end %>
     <p>コメント: <%= comment.body %></p>
-
+    <p>投稿者：<%= comment.user.name %></p>
+  </div>
 
 <% end %>

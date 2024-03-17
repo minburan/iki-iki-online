@@ -1,0 +1,19 @@
+<h1>投稿履歴</h1>
+
+<!--user show（ユーザーの詳細）-->
+<div>
+  <h3><%= @user.name%></h3>
+  <%= image_tag @user.get_profile_image(100,100) %>
+  <% if @user == current_user %>
+    <p><%= link_to "プロフィールを編集する", edit_user_path %></p>
+  <% end %>
+</div>
+
+<!--user comment index（ユーザーの投稿一覧）-->
+<% @comments.each do |comment| %>
+  <div>
+    <p><%= image_tag comment.user.get_profile_image(100,100) %></p>
+    <p>タイトル：<%= comment.title %></p>
+    <p>本文：<%= comment.body %></p>
+  </div>
+<% end %>
