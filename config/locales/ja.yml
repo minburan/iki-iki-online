@@ -1,0 +1,12 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name: "名前"
+
+ja:
+  activerecord:
+    attributes:
+      comment:
+        title: "タイトルが空白です"
+        body: "本文が空白です"

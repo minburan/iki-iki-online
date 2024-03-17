@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :responses, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
+  validates :name, presence: true, uniqueness: true
+
   has_one_attached :profile_image
 
   def get_profile_image(width, height)
@@ -17,4 +19,5 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
+  
 end
