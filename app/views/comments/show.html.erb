@@ -11,3 +11,22 @@
   <% end %>
 </div>
 
+<!--以下、responseに関するコード-->
+<div>
+  <p>返信件数:<%= @comment.responses.count %>件</p>
+  <% @comment.responses.each do |response| %>
+    <%= image_tag response.user.get_profile_image(100,100) %>
+    <%= response.user.name %>
+    <%= response.created_at.strftime('%Y/%m/%d') %>
+    <% if response.user == current_user %>
+      <%= link_to "削除する", comment_response_path(response.comment, response), method: :delete %>
+    <% end %>
+  <% end %>
+</div>
+
+<div>
+  <%= form_with model: [@comment, @response] do |f| %>
+    <%= f.text_area :response, rows: '5', placeholder:"返信はここへ記入" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>

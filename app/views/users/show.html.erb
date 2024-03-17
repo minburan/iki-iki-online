@@ -15,5 +15,6 @@
     <p><%= image_tag comment.user.get_profile_image(100,100) %></p>
     <p>タイトル：<%= comment.title %></p>
     <p>本文：<%= comment.body %></p>
+    <p><%= link_to "#{comment.responses.count}件の返信", comment_path(comment.id) %></p>
   </div>
 <% end %>
