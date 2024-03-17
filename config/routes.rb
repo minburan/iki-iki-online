@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   get "about" => "homes#about"
   resources :comments, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+    resource :favorite, only: [:create, :destroy]
     resources :responses, only: [:create, :destroy]
   end
   resources :users, only: [:show, :edit, :update]
