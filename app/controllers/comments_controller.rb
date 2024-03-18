@@ -10,11 +10,11 @@ class CommentsController < ApplicationController
       redirect_to comments_path
     else
       render :new
-    end  
+    end
   end
 
   def index
-    @comments = Comment.all
+    @comments = Comment.page(params[:page])
   end
 
   def show
@@ -33,9 +33,12 @@ class CommentsController < ApplicationController
   end
 
   def update
-    comment = Comment.find(params[:id])
-    comment.update(comment_params)
-    redirect_to comment_path(comment.id)
+    @comment = Comment.find(params[:id])
+    if @comment.update(comment_params)
+      redirect_to comment_path(comment.id)
+    else
+      render :edit
+    end
   end
 
   private
