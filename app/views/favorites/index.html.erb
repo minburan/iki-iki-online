@@ -1,0 +1,14 @@
+<h1>いいね一覧</h1>
+
+<% @favorites.each do |favorite| %>
+
+  <div>
+    <%= image_tag favorite.comment.user.get_profile_image(100,100) %>
+    <%= link_to comment_path(@comment.id) do%>
+      <P>タイトル:<%= favorite.comment.title %></p>
+    <% end %>
+    <p>コメント: <%= favorite.comment.body %></p>
+    <p>投稿者：<%= favorite.comment.user.name %></p>
+  </div>
+
+<% end %>

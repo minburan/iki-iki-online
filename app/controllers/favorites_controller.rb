@@ -14,4 +14,9 @@ class FavoritesController < ApplicationController
     redirect_to comment_path(comment)
   end
 
+  def index
+    @comment = Comment.find(params[:comment_id])
+    @favorites = current_user.favorites.where(comment_id: @comment.id)
+  end
+
 end
