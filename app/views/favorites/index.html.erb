@@ -4,7 +4,7 @@
 
   <div>
     <%= image_tag favorite.comment.user.get_profile_image(100,100) %>
-    <%= link_to comment_path(@comment.id) do%>
+    <%= link_to comment_path(favorite.comment.id) do%>
       <P>タイトル:<%= favorite.comment.title %></p>
     <% end %>
     <p>コメント: <%= favorite.comment.body %></p>

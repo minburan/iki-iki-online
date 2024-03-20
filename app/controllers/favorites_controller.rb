@@ -15,8 +15,9 @@ class FavoritesController < ApplicationController
   end
 
   def index
-    @comment = Comment.find(params[:comment_id])
-    @favorites = current_user.favorites.where(comment_id: @comment.id)
+    @comments = Comment.where(id: current_user.favorites.pluck(:comment_id))
+  @favorites = current_user.favorites
+
   end
 
 end

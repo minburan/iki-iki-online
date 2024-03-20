@@ -9,6 +9,11 @@
   <% end %>
 </div>
 
+<!--いいね一覧へ-->
+<div>
+  <%= link_to "いいね一覧", comment_favorites_path(comment_id: @comments.first.id) if @comments.present?  %>
+</div>
+
 <!--user comment index（ユーザーの投稿一覧）-->
 <% @comments.each do |comment| %>
   <div>
