@@ -7,8 +7,10 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
+      flash[:notice] = "投稿に成功しました"
       redirect_to comments_path
     else
+      flash.now[:notice] = "投稿に失敗しました"
       render :new
     end
   end

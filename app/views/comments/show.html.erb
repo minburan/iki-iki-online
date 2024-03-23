@@ -28,9 +28,10 @@
 <div>
   <p>返信件数:<%= @comment.responses.count %>件</p>
   <% @comment.responses.each do |response| %>
-    <%= image_tag response.user.get_profile_image(100,100) %>
-    <%= response.user.name %>
-    <%= response.created_at.strftime('%Y/%m/%d') %>
+    <p><%= image_tag response.user.get_profile_image(100,100) %></p>
+    <p><%= response.user.name %></p>
+    <p><%= response.response %></p>
+    <p><%= response.created_at.strftime('%Y/%m/%d') %></p>
     <% if response.user == current_user %>
       <%= link_to "削除する", comment_response_path(response.comment, response), method: :delete %>
     <% end %>

@@ -16,8 +16,7 @@ class FavoritesController < ApplicationController
 
   def index
     @comments = Comment.where(id: current_user.favorites.pluck(:comment_id))
-  @favorites = current_user.favorites
-
+    @favorites = current_user.favorites
   end
 
 end

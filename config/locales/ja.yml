@@ -1,12 +1,6 @@
 ja:
-  activerecord:
-    attributes:
+  devise:
+    failure:
       user:
-        name: 名前
-
-ja:
-  activerecord:
-    attributes:
-      comment:
-        title: タイトル
-        body: 本文
+        authenticated: "ログインに成功しました"
+        unauthenticated: "ログアウトしました"
