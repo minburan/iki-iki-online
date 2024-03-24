@@ -14,7 +14,7 @@
     <div class="container-fluid">
       <div class = "header row px-3 py-4" style="background-color: #d8ffb6 ;">
         <div class = "col-2">
-          <p>rogo</p>
+          <h5>rogo</h5>
         </div>
 
           <% if user_signed_in? %>
@@ -22,7 +22,7 @@
             <div class = "row">
               <div class = "col-4">
                 <button type="button" class="btn btn-light border-dark">
-                  <%= link_to "投稿する", new_comment_path %>
+                  <%= link_to "新規投稿", new_comment_path %>
                 </button>
               </div>
               <div class = "col-4">

@@ -1,1 +1,27 @@
-<h2>当コミュニティサイトについて</h2>
+<div class="container-fluid">
+  <div class="row no-gutters">
+    <div class="col-md-6 mx-4 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
+      <h5 class="text-light bg-dark py-4 mb-0">当コミュニティサイトについて</h5>
+       <div class="form-group p-4">
+
+        <p>
+          <strong>
+          全国高齢者いきいきサロン　オンライン
+          </strong>
+          へようこそ
+        </p><br>
+
+        <p>遠くにいる方とも交流をしてみたい、</p>
+        <p>感染症が気になりなかなか外出ができない、</p>
+        <p>お身体やご家庭の事情で室内で過ごすことが多くなった。</p><br>
+
+        <p>そんな方々がオンライン上で集えるスペースが誕生しました。</p><br>
+
+        <p>まずは
+        <%= link_to "ゲストログイン（お試し利用）", guest_sign_in_path, method: :post %>
+        にて、みなさんの投稿を見てみましょう。</p>
+
+      </div>
+    </div>
+  </div>
+</div>
