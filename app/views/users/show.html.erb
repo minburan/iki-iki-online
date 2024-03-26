@@ -1,27 +1,45 @@
-<h1>マイページ</h1>
+<div class ="container-fluid">
+  <div class="row no-gutters">
+    <div class="col-md-8 mx-5 mx-sm-auto text-center shadow-lg rounded px-0 my-4">
+      <h3 class ="text-light bg-dark py-3 mb-0">マイページ</h3>
 
-<!--user show（ユーザーの詳細）-->
-<div>
-  <h3><%= @user.name%></h3>
-  <%= image_tag @user.get_profile_image(100,100) %>
-  <% if @user == current_user %>
-    <p><%= link_to "プロフィールを編集する", edit_user_path %></p>
-  <% end %>
-</div>
+        <div class="row">
+          <div class = "col-md-2 mx-5 mx-sm-auto">
+                <%= image_tag @user.get_profile_image(100,100) %><br>
+                <%= @user.name%><br><br>
+                <% if @user == current_user %>
+                  <p><%= link_to "プロフィールを編集する", edit_user_path %></p>
+                <% end %>
+                <%= link_to "いいね一覧", comment_favorites_path(comment_id: @comments.first.id) if @comments.present? %>
+          </div>
 
-<!--いいね一覧へ-->
-<div>
-  <%= link_to "いいね一覧", comment_favorites_path(comment_id: @comments.first.id) if @comments.present?  %>
-</div>
+          <div class ="col-md-9 mx-3">
+           <table class ="table table-bordered">
+            <thead>
+              <tr>
+                <th colspan ="2">投稿一覧</th>
+              </tr>
+            </thead>
+            <tbody>
+             <% @comments.each do |comment| %>
+              <tr>
+              <td class ="col-6 text-left">
+                <p><%= comment.title %></p>
+              </td>
+              <td class ="col-6">
+                <p><%= comment.body %></p>
+                <%= link_to "#{comment.responses.count}件の返信", comment_path(comment.id) %>
+                <% end %>
+              </td>
+              </tr>
+            </div>
+          </div>
 
-<!--user comment index（ユーザーの投稿一覧）-->
-<% @comments.each do |comment| %>
-  <div>
-    <p><%= image_tag comment.user.get_profile_image(100,100) %></p>
-    <p>タイトル：<%= comment.title %></p>
-    <p>本文：<%= comment.body %></p>
-    <p><%= link_to "#{comment.responses.count}件の返信", comment_path(comment.id) %></p>
+        <%= paginate @comments %>
+
+        </tbody>
+      </table>
+      </div>
+    </div>
   </div>
-<% end %>
-
-<%= paginate @comments %>
+</div>
