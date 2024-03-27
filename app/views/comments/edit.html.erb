@@ -1,20 +1,42 @@
-<h1>編集画面</h1>
+<div class="container-fluid">
+  <div class="row no-gutters">
+    <div class="col-md-3 mx-2 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
+      <h5 class="text-light bg-dark py-4 mb-0">編集画面</h5>
+      <div class="form-group p-2">
 
-<% if @comment.errors.any? %>
-  <%= @comment.errors.count %>件のエラーがあります
-  <ul>
-    <% @comment.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+      <div>
+        <% if @comment.errors.any? %>
+        <%= @comment.errors.count %>件のエラーがあります
+        <ul>
+          <% @comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+        </ul>
+        <% end %>
+      </div>
 
-<%= form_with model: @comment, url: comment_path(@comment), method: :patch do |f| %>
-  <h4>タイトル</h4>
-  <%= f.text_field :title %>
 
-  <h4>本文</h4>
-  <%= f.text_area :body %>
-  <%= f.submit '保存する'%>
+      <%= form_with model: @comment, url: comment_path(@comment), method: :patch do |f| %>
+        <div class="form-group">
+          <div class="field">
+            <label for="comment_title" style="float: left;">タイトル</label>
+            <input class ="form-control comment-title" name="comment[title]" id="comment_title"></input>
+          </div>
+        </div>
 
-<% end %>
+        <div class="form-group">
+          <div class="field">
+            <label for="comment_body" style="float: left;">本文</label>
+            <textarea class="form-control body" name="comment[body]" id="comment_body"></textarea>
+          </div>
+        </div>
+
+        <div class="action">
+          <%= f.submit '保存する', class:"btn btn-lg btn-block btn-info mt-3" %>
+        </div>
+      <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
