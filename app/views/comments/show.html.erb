@@ -1,46 +1,85 @@
-<h1>投稿詳細</h1>
+<div class="container-fluid">
+  <div class="row no-gutters">
+    <div class="col-md-8 mx-5 mx-sm-auto text-center shadow-lg rounded px-0 my-4">
+      <h3 class="text-light bg-dark py-4 mb-0">投稿詳細</h3>
+      <div class="form-group p-2">
 
-<div>
-  <p>投稿者：<%= @comment.user.name %></p>
-  <p>タイトル：<%= @comment.title %></p>
-  <p>本文：<%= @comment.body %></p>
-  <p>投稿日：<%= @comment.created_at.strftime('%Y/%m/%d')%></p>
-  <% if @comment.user == current_user %>
-    <%= link_to "編集する", edit_comment_path(@comment.id) %>
-    <%= link_to "削除する", comment_path(@comment.id), method: :delete %>
-  <% end %>
-  <% if @comment.favorited_by?(current_user) %>
-    <p>
-      <%= link_to comment_favorite_path(@comment), method: :delete do %>
-        ♥<%= @comment.favorites.count %>いいね
-      <% end %>
-    </p>
-      <% else %>
-    <p>
-      <%= link_to comment_favorite_path(@comment), method: :post do %>
-        ♡<%= @comment.favorites.count %>いいね
-      <% end %>
-    </p>
-  <% end %>
-</div>
+        <div class="row">
+          <div class = "col-md-2 mx-5 mx-sm-auto">
+            <div>
+              <%= image_tag @comment.user.get_profile_image(100,100) %><br>
+              <p><%= @comment.user.name %></p>
+              <p>タイトル：<%= @comment.title %></p>
+              <p>本文：<%= @comment.body %></p>
+              <p><%= @comment.created_at.strftime('%Y/%m/%d')%></p>
+              <% if @comment.user == current_user %>
+                <div class ="form-group">
+                  <button type ="button" class ="btn btn-light border-success">
+                    <%= link_to "編集する", edit_comment_path(@comment.id) %>
+                  </button>
+                  <button type ="button" class ="btn btn-light border-danger">
+                    <%= link_to "削除する", comment_path(@comment.id), method: :delete %>
+                  </button>
+                </div>
+              <% end %>
+              <% if @comment.favorited_by?(current_user) %>
+              <p>
+                <%= link_to comment_favorite_path(@comment), method: :delete do %>
+                  ♥<%= @comment.favorites.count %>いいね
+                <% end %>
+              </p>
+              <% else %>
+              <p>
+                <%= link_to comment_favorite_path(@comment), method: :post do %>
+                  ♡<%= @comment.favorites.count %>いいね
+                <% end %>
+              </p>
+              <% end %>
+              <p>返信件数:<%= @comment.responses.count %>件</p>
+            </div>
+            <div class ="form-group">
+              <%= form_with model: [@comment, @response] do |f| %>
+              <div class ="field">
+                <%= f.text_area :response, rows: '5', placeholder:"返信はここへ記入" %>
+              </div>
+            </div>
+            <div class ="action">
+              <%= f.submit "送信する" ,class:"btn btn-block btn-info mt-3"%>
+            </div>
+            <% end %>
+          </div>
 
 <!--以下、responseに関するコード-->
-<div>
-  <p>返信件数:<%= @comment.responses.count %>件</p>
-  <% @comment.responses.each do |response| %>
-    <p><%= image_tag response.user.get_profile_image(100,100) %></p>
-    <p><%= response.user.name %></p>
-    <p><%= response.response %></p>
-    <p><%= response.created_at.strftime('%Y/%m/%d') %></p>
-    <% if response.user == current_user %>
-      <%= link_to "削除する", comment_response_path(response.comment, response), method: :delete %>
-    <% end %>
-  <% end %>
-</div>
 
-<div>
-  <%= form_with model: [@comment, @response] do |f| %>
-    <%= f.text_area :response, rows: '5', placeholder:"返信はここへ記入" %>
-    <%= f.submit "送信する" %>
-  <% end %>
+          <div class ="col-md-8 mx-3">
+           <table class ="table table-bordered">
+            <thead>
+              <tr>
+                <th>返信者</th>
+                <th>返信コメント</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @comment.responses.each do |response| %>
+              <tr>
+                <td>
+                  <%= image_tag response.user.get_profile_image(100,100) %><br>
+                  <%= response.user.name %><br>
+                  <%= response.created_at.strftime('%Y/%m/%d') %>
+                  <% if response.user == current_user %>
+                    <%= link_to "削除する", comment_response_path(response.comment, response), method: :delete %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= response.response %>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+           </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
