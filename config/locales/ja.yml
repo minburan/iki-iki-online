@@ -1,6 +1,0 @@
-ja:
-  devise:
-    failure:
-      user:
-        authenticated: "ログインに成功しました"
-        unauthenticated: "ログアウトしました"

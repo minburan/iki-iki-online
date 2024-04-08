@@ -15,6 +15,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to user_path(@user.id)
     else
+      flash[:error] = "更新に失敗しました。"
       render :edit
     end
   end
