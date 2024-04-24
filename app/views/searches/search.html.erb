@@ -1,0 +1,28 @@
+<!--レイアウトを整えていきたい-->
+
+<h2>検索結果</h2>
+
+<table class="table table-hover table-inverse">
+
+  <!--モデルがUserの時 -->
+  <% if @range == "User" %>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% else %>
+
+    <!--モデルがUserではない時(Commentの時) -->
+    <tbody>
+      <% @comments.each do |comment| %>
+        <tr>
+          <td><%= comment.title %></td>
+          <td><%= comment.body %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% end %>
+</table>
